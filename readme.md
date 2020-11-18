@@ -302,7 +302,7 @@ First, we have a basic page.
 ```
 
 Things to note are the input. The NAME attributes will determine which
-date is going to get passed through the HTTP request.
+data is going to get passed through the HTTP request.
 
 - `<input name="username">`
 - `<input name="password">`
