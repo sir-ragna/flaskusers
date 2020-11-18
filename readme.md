@@ -1,6 +1,15 @@
 
 # Flask project to create the most basic login possible
 
+### simply downloading and running the source code
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+flask run
+```
+
 # Creating and activating the virtual environment
 
 Create a virtual environment and activate it.
