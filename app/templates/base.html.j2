@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+{% with messages=get_flashed_messages() %}
+    {% for message in messages %}
+        <b>{{message}}</b><br>
+    {% endfor %}
+{% endwith %}
+
+{% block content %}
+{% endblock content %}
+
+</body>
+</html>
