@@ -392,7 +392,7 @@ def create_user(username, password):
 ```
 
 If we try to INSERT a duplicate username value the `conn.commit()` line will raise
-an exception. This exception will be catched in the `register()` function on the line
+an exception. This exception will be caught in the `register()` function on the line
 `except Exception as ex:`.
 
 The reason for this is because we put the column in our sqlite database on `unique`.
