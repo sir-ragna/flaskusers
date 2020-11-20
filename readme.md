@@ -54,7 +54,7 @@ from app import database
 
 Inside the app directory I also create a `routes.py` and a `database.py` file.
 
-```sh
+```txt
 ├── app
 │   ├── __init__.py
 │   ├── database.py
@@ -166,7 +166,20 @@ We create another file `app/templates/login.html.j2`
     <button type="submit">sign in</button>
 </form>
 {% endblock content %}
+```
 
+Reminder on how the file structure looks.
+
+```txt
+├── app
+│   ├── __init__.py
+│   ├── database.py
+│   ├── routes.py
+│   └── templates
+│       ├── base.html.j2
+│       ├── login.html.j2
+│       └── register.html.j2
+└── application.py
 ```
 
 ### render the templates
