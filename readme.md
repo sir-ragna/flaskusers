@@ -177,8 +177,7 @@ Reminder on how the file structure looks.
 │   ├── routes.py
 │   └── templates
 │       ├── base.html.j2
-│       ├── login.html.j2
-│       └── register.html.j2
+│       └── login.html.j2
 └── application.py
 ```
 
