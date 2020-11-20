@@ -224,7 +224,13 @@ with sqlite3.connect(DATABASE) as conn:
     cursor.close()
 ```
 
-I use the bcrypt module for hashing. So we need to install it.
+The above file is part of our project but to create the initial database we can execute it once as a stand-alone script so that our database is created.
+
+```sh
+python app/database.py
+```
+
+Because I prefer bcrypt for hasing and we will need it in some database functions, install the `bcrypt` module in your virtual environment.
 
 ```sh
 pip install bcrypt
