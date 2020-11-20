@@ -75,7 +75,7 @@ We test it by executing `flask run`. (Do not forget to make sure that your envir
 127.0.0.1 - - [18/Nov/2020 16:45:51] "GET / HTTP/1.1" 200 -
 ```
 
-### Create a run script
+### Create a run script (for linux)
 
 ```sh
 #!/bin/sh
@@ -86,6 +86,16 @@ flask run
 ```
 
 Now we can easily start our project by executing `./run.sh`.
+
+### Creat a run script (for windows)
+
+```pwsh
+# file: run.ps1
+& .\venv\Scripts\activate.ps1
+flask run
+```
+
+Now you can run your project by executing `& .\run.ps1`.
 
 ### Running the server in debug mode
 
