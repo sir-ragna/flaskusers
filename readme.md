@@ -358,6 +358,7 @@ The METHOD attribute of the `<form>` is going to decide how the information is s
 To render this template and to deal with the data. Write the following function.
 
 ```python
+# file:app/routes.py
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -377,7 +378,7 @@ def register():
 
 1. we check whether the method is a post.
 1.1 If it happens to be a GET request we can simply render the page
-2. We whether the 'username' and 'password' values are present
+2. We check whether the 'username' and 'password' values are present
 3. We `try:`  to execute `create_user(username, password)`
 
 The reason for using a `try:` here is because in the create_user function there is no error handeling.
