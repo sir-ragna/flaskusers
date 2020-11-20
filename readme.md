@@ -29,10 +29,14 @@ Once the virtual environment has been activated you can install flask and other 
 
 ## Create the basic files and folder layout
 
+Create a file `application.py`.
+
 ```python
 # file: application.py
 from app import app
 ```
+
+Create an `app` directory with an `__init__.py`.
 
 ```python
 # file: app/__init__.py
