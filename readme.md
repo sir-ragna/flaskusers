@@ -44,7 +44,7 @@ Create an `app` directory with an `__init__.py`.
 
 ```python
 # file: app/__init__.py
-import flask import Flask
+from flask import Flask
 
 app = Flask(__init__)
 
