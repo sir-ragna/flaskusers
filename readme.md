@@ -1,14 +1,18 @@
 
 # Flask project to create the most basic login possible
 
-### simply downloading and running the source code
+### If you are only interested in running the source code
 
 ```bash
+git clone https://github.com/sir-ragna/flaskusers
+cd flaskusers
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 flask run
 ```
+
+If not.
 
 # Creating and activating the virtual environment
 
