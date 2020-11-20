@@ -46,7 +46,7 @@ Create an `app` directory with an `__init__.py`.
 # file: app/__init__.py
 from flask import Flask
 
-app = Flask(__init__)
+app = Flask(__name__)
 
 from app import routes
 from app import database
