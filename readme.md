@@ -376,8 +376,7 @@ def register():
     return render_template('register.html.j2')
 ```
 
-1. we check whether the method is a post.
-1.1 If it happens to be a GET request we can simply render the page
+1. we check whether the method is a post.(If it happens to be a GET request we can simply render the page)
 2. We check whether the 'username' and 'password' values are present
 3. We `try:`  to execute `create_user(username, password)`
 
