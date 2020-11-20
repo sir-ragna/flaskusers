@@ -54,6 +54,14 @@ from app import database
 
 Inside the app directory I also create a `routes.py` and a `database.py` file.
 
+```sh
+├── app
+│   ├── __init__.py
+│   ├── database.py
+│   └── routes.py
+└── application.py
+```
+
 ### Creating our first route.
 
 Inside the routes.py file we create our first route.
