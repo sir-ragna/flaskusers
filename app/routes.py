@@ -20,7 +20,7 @@ def homepage():
     if 'user_id' in session:
         user_id = session['user_id']
         user = get_user(user_id)
-
+    
     return render_template('home.html.j2', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])

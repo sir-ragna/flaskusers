@@ -3,7 +3,13 @@
 {% block content %}
 <h1>Home page</h1>
 {% if user %}
-<i>Signed in as <b>{{user['user_nickname']}}</b></i>
+<i>Signed in as <b>
+{% if user['user_nickname'] %}
+    {{user['user_nickname']}}
+{% else %}
+    {{user['user_email']}}
+{% endif %}
+</b></i>
 {% else %}
 <i>Not signed in</i>
 {% endif %}
