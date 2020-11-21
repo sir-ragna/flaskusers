@@ -33,13 +33,6 @@ Once the virtual environment has been activated you can install flask and other 
 
 ## Create the basic files and folder layout
 
-Create a file `application.py`.
-
-```python
-# file: application.py
-from app import app
-```
-
 Create an `app` directory with an `__init__.py`.
 
 ```python
@@ -59,7 +52,7 @@ Inside the app directory I also create a `routes.py` and a `database.py` file.
 │   ├── __init__.py
 │   ├── database.py
 │   └── routes.py
-└── application.py
+└── venv/
 ```
 
 ### Creating our first route.
@@ -178,7 +171,7 @@ Reminder on how the file structure looks.
 │   └── templates
 │       ├── base.html.j2
 │       └── login.html.j2
-└── application.py
+└── venv/
 ```
 
 ### render the templates
