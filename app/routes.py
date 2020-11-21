@@ -22,12 +22,12 @@ def homepage():
 def login():
     if request.method == 'POST':
         session.clear()
-        if 'username' in request.form and 'password' in request.form:
-            username = request.form['username']
+        if 'email' in request.form and 'password' in request.form:
+            email = request.form['email']
             password = request.form['password']
-            if check_password(username, password):
+            if check_password(email, password):
                 flash("Authentication succeeded")
-                user_id = get_user_id(username)
+                user_id = get_user_id(email)
                 session['user_id'] = user_id
                 return redirect(url_for('homepage'))
             else:
@@ -44,12 +44,12 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        if 'username' in request.form and 'password' in request.form:
-            username = request.form['username']
+        if 'email' in request.form and 'password' in request.form:
+            email = request.form['email']
             password = request.form['password']
             try:
-                create_user(username, password)
-                flash(f"User '{username}' created")
+                create_user(email, password)
+                flash(f"User '{email}' created")
                 return redirect(url_for('homepage'))
             except Exception as ex:
                 app.logger.error('Could not register: {}'.format(ex), exc_info=True)

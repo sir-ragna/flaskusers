@@ -2,13 +2,13 @@
 
 {% block content %}
 <h1>Log in with your existing account</h1>
-<form method="post" action="{{ url_for('login') }}">
-    <label for="username">username</label> 
-    <input name="username" id="username" type="text"> 
+<form method="post" action="{{ url_for('login') }}" validate>
+    <label for="email">email</label> 
+    <input name="email" id="email" type="email" required autofocus> 
     <br>
     <br>
     <label for="password">password</label>
-    <input name="password" id="password" type="password">
+    <input name="password" id="password" type="password" required>
     <br>
     <button type="submit">sign in</button>
 </form>
