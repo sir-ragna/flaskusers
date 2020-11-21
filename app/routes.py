@@ -16,7 +16,12 @@ def login_required(f):
 
 @app.route('/')
 def homepage():
-    return render_template('home.html.j2')
+    user = None
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user = get_user(user_id)
+
+    return render_template('home.html.j2', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -61,3 +66,31 @@ def register():
 @login_required
 def admin():
     return "Only signed in users can see this"
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    user_id = session['user_id']
+
+    if request.method == 'POST':
+        if 'nickname' in request.form:
+            save_nickname(user_id, request.form['nickname'])
+        elif 'verifyme' in request.form:
+            generate_verification_link(user_id)
+            # TODO sent email somehow
+
+    user = get_user(user_id)
+    return render_template('profile.html.j2', user=user)
+
+@app.route('/activate/<string:activation_code>')
+def activate_email(activation_code):
+    try:
+        if verify_user_email(activation_code):
+            flash("User has been activated")
+            return redirect(url_for("homepage"))
+    except Exception as ex:
+        print("{}".format(ex))
+    
+    flash("Could not activate user")
+    return redirect(url_for("homepage"))
+    

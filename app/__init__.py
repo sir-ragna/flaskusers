@@ -6,3 +6,4 @@ app.config.from_object(Config)
 
 from app import routes
 from app import database
+from app import cli

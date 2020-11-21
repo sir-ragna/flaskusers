@@ -1,0 +1,27 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+
+<ul>
+    <li>Nickname: {% if user['user_nickname'] %}{{ user['user_nickname'] }}{% else %}-{% endif %}</li>
+    <li>Email: {{ user['user_email'] }}</li>
+    <li>Verified: {% if user['user_verified_email'] %}✅{% else %}&#x274C;{% endif %}</li>
+</ul>
+{% if user['user_verified_email'] %}
+{% else %}
+<h3>request verification</h3>
+<form method="post">
+    <input type="hidden" name="verifyme" value="1">
+    <button type="submit">send verification email</button>
+</form>
+{% endif %}
+
+<h3>edit nickname</h3>
+<form method="post">
+    <label for="nickname">nickname</label>
+    <input type="text" id="nickname" name="nickname" value="{% if user['user_nickname'] %}{{ user['user_nickname'] }}{% endif %}">
+    <button type="submit">save nickname</button>
+</form>
+<br><br>
+<a href="{{ url_for('homepage') }}">return to homepage</a>
+{% endblock content %}
