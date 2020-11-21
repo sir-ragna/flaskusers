@@ -1,4 +1,5 @@
 database.db
+.vscode/
 venv/
 
 *.pyc
