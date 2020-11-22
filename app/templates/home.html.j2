@@ -2,13 +2,10 @@
 
 {% block content %}
 <h1>Home page</h1>
-{% if user %}
+
+{% if current_user.is_authenticated %}
 <i>Signed in as <b>
-{% if user['user_nickname'] %}
-    {{user['user_nickname']}}
-{% else %}
-    {{user['user_email']}}
-{% endif %}
+    {{ current_user.email }}
 </b></i>
 {% else %}
 <i>Not signed in</i>

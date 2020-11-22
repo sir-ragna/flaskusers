@@ -2,38 +2,24 @@ from app import app
 from app.database import *
 from flask import render_template, request, flash, redirect, url_for, session
 from functools import wraps
-
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' in session:
-            if is_valid_user_id(session['user_id']):
-                return f(*args, **kwargs) # We found a valid user
-        app.logger.warning("No session, this pages requires login")
-        flash("This pages requires you to sign-in")
-        return redirect(url_for('login'))    
-    return decorated_function
+from flask_login import login_required, login_user, logout_user, current_user
 
 @app.route('/')
-def homepage():
-    user = None
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = get_user(user_id)
-    
-    return render_template('home.html.j2', user=user)
+def homepage():    
+    return render_template('home.html.j2')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        session.clear()
+        logout_user()
         if 'email' in request.form and 'password' in request.form:
             email = request.form['email']
             password = request.form['password']
             if check_password(email, password):
                 flash("Authentication succeeded")
                 user_id = get_user_id(email)
-                session['user_id'] = user_id
+                user = load_user(user_id)
+                login_user(user)
                 return redirect(url_for('homepage'))
             else:
                 flash("Failed to authenticate")
@@ -42,7 +28,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.clear()
+    logout_user()
     flash("signed out")
     return redirect(url_for('homepage'))
 
@@ -70,17 +56,15 @@ def admin():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    user_id = session['user_id']
-
     if request.method == 'POST':
         if 'nickname' in request.form:
-            save_nickname(user_id, request.form['nickname'])
+            save_nickname(current_user.user_id, request.form['nickname'])
         elif 'verifyme' in request.form:
-            generate_verification_link(user_id)
+            generate_verification_link(current_user.user_id)
+            flash("requested a verification link")
             # TODO sent email somehow
-
-    user = get_user(user_id)
-    return render_template('profile.html.j2', user=user)
+    app.login_manager._load_user() ## NEEDED to refresh the 'current_user' in the template
+    return render_template('profile.html.j2')
 
 @app.route('/activate/<string:activation_code>')
 def activate_email(activation_code):

@@ -1,13 +1,13 @@
 {% extends "base.html.j2" %}
 
 {% block content %}
-
+<h1>Profile information</h1>
 <ul>
-    <li>Nickname: {% if user['user_nickname'] %}{{ user['user_nickname'] }}{% else %}-{% endif %}</li>
-    <li>Email: {{ user['user_email'] }}</li>
-    <li>Verified: {% if user['user_verified_email'] %}✅{% else %}&#x274C;{% endif %}</li>
+    <li>Nickname: {% if current_user.nickname %}{{ current_user.nickname }}{% else %}-{% endif %}</li>
+    <li>Email: {{ current_user.email }}</li>
+    <li>Verified: {% if current_user.verified_email %}✅{% else %}&#x274C;{% endif %}</li>
 </ul>
-{% if user['user_verified_email'] %}
+{% if current_user.verified_email %}
 {% else %}
 <h3>request verification</h3>
 <form method="post">
@@ -19,7 +19,7 @@
 <h3>edit nickname</h3>
 <form method="post">
     <label for="nickname">nickname</label>
-    <input type="text" id="nickname" name="nickname" value="{% if user['user_nickname'] %}{{ user['user_nickname'] }}{% endif %}">
+    <input type="text" id="nickname" name="nickname" value="{% if current_user.nickname %}{{ current_user.nickname }}{% endif %}">
     <button type="submit">save nickname</button>
 </form>
 <br><br>

@@ -2,9 +2,34 @@ import sqlite3
 import bcrypt
 from uuid import uuid4
 from app import app
+from app import login_manager
 from datetime import datetime, timedelta
+from flask_login import UserMixin
 
 DATABASE = app.config['DATABASE']
+
+class User(UserMixin):
+    def __init__(self, user_id, user_email, user_nickname, user_verified_email):
+        self.id = user_id
+        self.user_id = user_id
+        self.email = user_email
+        self.nickname = user_nickname
+        self.verified_email = user_verified_email
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Return a User object or None"""
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.execute("SELECT user_id, user_email, "
+            "user_nickname, user_verified_email "
+            "FROM users "
+            "WHERE user_id = ?;", (user_id,))
+        row = cursor.fetchone()
+        if row == None:
+            return None
+        return User(*row)
+        #return User(row[0], row[1], row[2], row[3])
+
 
 def hash_password(password):
     """Hashes an utf-8 string and returns an utf-8 string of the hash"""
