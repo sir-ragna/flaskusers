@@ -1,7 +1,9 @@
 from app import app
+from app import mail
 from app.database import *
 from flask import render_template, request, flash, redirect, url_for, session
 from functools import wraps
+from flask_mail import Message
 
 def login_required(f):
     @wraps(f)
@@ -76,8 +78,14 @@ def profile():
         if 'nickname' in request.form:
             save_nickname(user_id, request.form['nickname'])
         elif 'verifyme' in request.form:
-            generate_verification_link(user_id)
-            # TODO sent email somehow
+            act_link = generate_verification_link(user_id)
+            message = Message("Activate your account", 
+                sender=("ReX", app.config['MAIL_USERNAME']))
+            user = get_user(user_id)
+            message.recipients = [ user['user_email'] ]
+            message.html = render_template("email_activation.html.j2", act_link=act_link)
+
+            mail.send(message)
 
     user = get_user(user_id)
     return render_template('profile.html.j2', user=user)

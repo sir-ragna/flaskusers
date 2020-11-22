@@ -2,6 +2,7 @@ import sqlite3
 import bcrypt
 from uuid import uuid4
 from app import app
+from flask import url_for
 from datetime import datetime, timedelta
 
 DATABASE = app.config['DATABASE']
@@ -78,6 +79,8 @@ def generate_verification_link(user_id):
             "(act_code, act_user_id, act_expiration) "
             "VALUES (?, ?, ?)", (code, user_id, str_future))
         conn.commit()
+    
+    return url_for('activate_email', activation_code=code, _external=True)
 
 def verify_user_email(activation_code):
     """Return True on success, False on failure"""

@@ -12,6 +12,19 @@ pip install -r requirements.txt
 flask run
 ```
 
+Define a `.flaskenv` or `.env` file with the following options.
+
+```sh
+FLASK_ENV=development
+FLASK_DEBUG=1
+SECRET_KEY="for-dev-environment-only"
+MAIL_SERVER=""
+MAIL_PORT=465
+MAIL_USE_SSL=True
+MAIL_USERNAME=""
+MAIL_PASSWORD=""
+```
+
 If not.
 
 # Creating and activating the virtual environment
