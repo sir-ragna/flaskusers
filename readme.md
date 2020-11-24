@@ -409,5 +409,3 @@ The reason for this is because we put the column in our sqlite database on `uniq
 
 Without the UNIQUE attribute on this column name it would be possible to create 
 multiple users with the same name.
-
-
